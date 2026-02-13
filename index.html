@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>💕 Valentine's Special Proposal 💕</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Quicksand', cursive, sans-serif;
+            background: linear-gradient(135deg, #FFB6C1 0%, #FF69B4 50%, #E6E6FA 100%);
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden !important;
+        }
+
+        /* Magical Background Elements */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        .floating-heart {
+            position: absolute;
+            color: rgba(255, 105, 180, 0.6);
+            font-size: 20px;
+            animation: floatUp 8s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Card */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            z-index: 10;
+            animation: cardGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes cardGlow {
+            0% {
+                box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+            }
+
+            100% {
+                box-shadow: 0 20px 80px rgba(255, 105, 180, 0.5);
+            }
+        }
+
+        #question {
+            font-size: 28px;
+            color: #FF1493;
+            margin-bottom: 30px;
+            font-weight: 600;
+            line-height: 1.4;
+            animation: textWiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes textWiggle {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        /* Cute Buttons */
+        button {
+            padding: 15px 35px;
+            margin: 15px;
+            font-size: 20px;
+            font-weight: 600;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Quicksand', cursive, sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        #yesBtn {
+            background: linear-gradient(135deg, #FF69B4, #FFB6C1);
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.4);
+            animation: bounce 2s infinite;
+        }
+
+        #yesBtn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 105, 180, 0.6);
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        #noBtn {
+            background: linear-gradient(135deg, #ddd, #bbb);
+            color: #666;
+            position: absolute;
+            animation: wobble 3s infinite;
+            transition: all 0.2s ease;
+        }
+
+        #noBtn:hover {
+            transform: scale(0.95);
+            background: linear-gradient(135deg, #ffcccc, #ffaaaa);
+        }
+
+        @keyframes wobble {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(3deg);
+            }
+
+            75% {
+                transform: rotate(-3deg);
+            }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #FFD700;
+            animation: confettiFall 3s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Final Celebration */
+        .celebration-text {
+            width: 85%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            font-weight: 700;
+            color: #FFFFFF;
+            text-align: center;
+            z-index: 20;
+            animation: celebrationPulse 1s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
+        }
+
+        @keyframes celebrationPulse {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .card {
+                padding: 30px 20px;
+                margin: 15px;
+                border-radius: 20px;
+                max-width: 95vw;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            #question {
+                font-size: 20px;
+                line-height: 1.5;
+                margin-bottom: 40px;
+                /* Increased margin to prevent overlap */
+            }
+
+            button {
+                padding: 15px 20px;
+                font-size: 16px;
+                margin: 8px 0;
+                border-radius: 20px;
+                width: 100%;
+                max-width: 280px;
+                position: relative !important;
+                /* Force relative on mobile to stay in flow */
+                top: auto !important;
+                left: auto !important;
+                transform: none !important;
+            }
+
+            #noBtn {
+                position: relative !important;
+                margin-top: 10px;
+            }
+
+            .modal-content {
+                border-radius: 20px;
+                max-width: 90vw;
+                width: 100%;
+            }
+
+            .celebration-text {
+                font-size: 24px;
+                padding: 20px;
+                line-height: 1.4;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 25px 15px;
+                margin: 10px;
+            }
+
+            #question {
+                font-size: 18px;
+                margin-bottom: 35px;
+            }
+
+            button {
+                padding: 14px 15px;
+                font-size: 14px;
+                margin: 6px 0;
+                width: 100%;
+            }
+
+            .celebration-text {
+                font-size: 20px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card" id="card">
+        <h2 id="question">Hey there! <br>✨ I have something super special to ask you... 💕</h2>
+        <button id="yesBtn">Let me sit down first 😅🌟</button>
+        <button id="noBtn">Maybe later...</button>
+    </div>
+
+    <!-- Modal for "No" response -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2 style="color: #FF69B4; margin-bottom: 20px;">මගෙන් එහෙම බෙරෙන්න බැ ළමයො 🥺</h2>
+            <p style="color: #666; margin-bottom: 30px;">Pretty please with a cherry on top? 🍒</p>
+            <button id="modalYesBtn" style="background: linear-gradient(135deg, #FF69B4, #FFB6C1); color: white;">Okay,
+                fine! 😊</button>
+        </div>
+    </div>
+
+    <script>
+        const card = document.getElementById("card");
+        const question = document.getElementById("question");
+        const yesBtn = document.getElementById("yesBtn");
+        const noBtn = document.getElementById("noBtn");
+        const modal = document.getElementById("modal");
+        const modalYesBtn = document.getElementById("modalYesBtn");
+
+        let currentStep = 0;
+        let heartsInterval;
+        let confettiInterval;
+
+        // Enhanced mature questions flow
+        const questions = [
+            {
+                text: "Can I share something deeply meaningful with you? 💝",
+                yesBtn: "I'd love that 🌟",
+                noBtn: "Maybe later..."
+            },
+            {
+                text: "Do you believe in a love that grows stronger each day? ✨",
+                yesBtn: "Absolutely! 💫",
+                noBtn: "I'm hopeful 🌙"
+            },
+            {
+                text: "Does my presence bring joy and warmth to your heart? 💓",
+                yesBtn: "Always, completely ❤️",
+                noBtn: "Often, yes 🥰"
+            },
+            {
+                text: "Can you see us building beautiful memories together? 🌹",
+                yesBtn: "I see it clearly 💕",
+                noBtn: "I imagine it sometimes 🌸"
+            },
+            {
+                text: "Are you ready for a commitment filled with trust and passion? 🔥",
+                yesBtn: "More than ready! 💖",
+                noBtn: "I'm open to it 💝"
+            },
+            {
+                text: "Will you be my Valentine and walk this journey of love with me? 💕",
+                yesBtn: "YES, forever! 💖",
+                noBtn: ""
+            },
+            {
+                text: "Are you absolutely certain about choosing us, together? 🌟<br>This is the moment that changes everything... 💕",
+                yesBtn: "100% CERTAIN! 💖",
+                noBtn: "COMPLETELY SURE! ✨"
+            }
+        ];
+
+        // Create magical background elements
+        function createSparkles() {
+            for (let i = 0; i < 20; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 3 + 's';
+                document.body.appendChild(sparkle);
+            }
+        }
+
+        function createFloatingHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = '💕';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 8000);
+            }, 2000);
+        }
+
+        function startHearts() {
+            if (heartsInterval) return;
+            heartsInterval = setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = '💖';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 6000);
+            }, 400);
+        }
+
+        function startCelebration() {
+            card.style.display = "none";
+            confettiInterval = setInterval(() => {
+                const confetti = document.createElement("div");
+                confetti.className = "confetti";
+                confetti.style.left = Math.random() * window.innerWidth + "px";
+                confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 3000);
+            }, 100);
+
+            startHearts();
+
+            const celebrationDiv = document.createElement("div");
+            celebrationDiv.className = "celebration-text";
+            celebrationDiv.innerHTML = "Happy Valentine’s Day <br> my love. ❤️<br>Loving you has been the most beautiful part of my life. You bring peace to my chaos, strength to my weakness, and meaning to my every day. I’m grateful for you—not just today, but always 💖";
+            document.body.appendChild(celebrationDiv);
+
+            document.body.style.animation = "shake 0.5s";
+            setTimeout(() => {
+                document.body.style.animation = "";
+            }, 500);
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    25% { transform: translateX(-10px); }
+                    75% { transform: translateX(10px); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Move NO button playfully
+        document.addEventListener("mousemove", (e) => {
+            if (currentStep < questions.length - 1) { // Stop moving for the last question which has no NO btn logically (or both are YES)
+                const rect = noBtn.getBoundingClientRect();
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+
+                const distance = Math.sqrt(
+                    Math.pow(mouseX - (rect.left + rect.width / 2), 2) +
+                    Math.pow(mouseY - (rect.top + rect.height / 2), 2)
+                );
+
+                if (distance < 100) {
+                    const x = Math.random() * (window.innerWidth - rect.width);
+                    const y = Math.random() * (window.innerHeight - rect.height);
+                    noBtn.style.left = x + "px";
+                    noBtn.style.top = y + "px";
+
+                    const messages = ["Are you sure? 🥺", "Don't be shy! 😊", "Pretty please! 🥰"];
+                    noBtn.innerText = messages[Math.floor(Math.random() * messages.length)];
+                }
+            }
+        });
+
+        // YES button click
+        yesBtn.onclick = () => {
+            if (currentStep < questions.length) {
+                const q = questions[currentStep];
+                question.innerHTML = q.text;
+                yesBtn.innerText = q.yesBtn;
+
+                if (q.noBtn) {
+                    noBtn.innerText = q.noBtn;
+                    noBtn.style.display = "inline-block";
+                } else {
+                    noBtn.style.display = "none";
+                }
+
+                if (currentStep >= 2) {
+                    startHearts();
+                }
+
+                currentStep++;
+
+                if (currentStep >= questions.length) {
+                    startCelebration();
+                }
+            }
+        };
+
+        // NO button click
+        noBtn.onclick = () => {
+            modal.style.display = "block";
+            startHearts();
+        };
+
+        // Modal YES button
+        modalYesBtn.onclick = () => {
+            modal.style.display = "none";
+            if (currentStep < questions.length) {
+                yesBtn.click();
+            }
+        };
+
+        // Initialize magical background
+        createSparkles();
+        createFloatingHearts();
+    </script>
+
+</body>
+
+</html>
